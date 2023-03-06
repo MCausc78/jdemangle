@@ -135,10 +135,15 @@ fn main() {
 			false
 		}
 	} {
-		match parse_signature(&mut signature) {
-			Some(jtype) => println!("{}", jtype.demangle_to_java()),
-			None => println!("{}", signature),
-		}
+		let trimed_signature = signature
+			.trim()
+			.to_string();
+		println!("{}", match parse_signature(&mut (trimed_signature
+			.clone()))
+		{
+			Some(jtype) => jtype.demangle_to_java(),
+			None => trimed_signature,
+		});
 		signature.clear();
 	}
 }
