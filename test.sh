@@ -71,11 +71,12 @@ EOF
 
 printf "lines: \"%s\"\n" "$LINES"
 OUTPUT="$(printf "%s" "$LINES" | ./target/release/jdemangle)"
+printf "\n\noutput: \"%s\"\n" "$OUTPUT"
 if [[ "$OUTPUT" != "$EXPECTING" ]]
 then
-	printf "\nfail: \"%s\"\n\nexpected: \"%s\"\n" "$OUTPUT" "$EXPECTING"
+	printf "\nfail, expected: \"%s\"\n" "$EXPECTING"
 else
-	printf "\nsuccess: \"%s\"\n" "$OUTPUT"
+	echo -e "\nsuccess"
 fi
 
 # echo -ne "Z\nB\nC\nS\nI\nJ\nF\nD\nLjava/lang/String;\n[Z\n[B\n[C\n[S\n[I\n[J\n[F\n[D\n[Ljava/lang/String;\n[[Z\n[[B\n[[C\n[[S\n[[I\n[[J\n[[F\n[[D\n[[Ljava/lang/BigInteger;\n()V\n(Ljava/lang/String;)V\n(II)I" | ./target/release/jdemangle

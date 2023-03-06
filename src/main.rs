@@ -34,7 +34,14 @@ impl JType {
 				let mut result = String::new();
 				result.push_str(&return_type.demangle_to_java());
 				result.push('(');
-				if !args.is_empty() {
+				result.push_str(args
+					.iter()
+					.map(|signature| signature
+						.demangle_to_java())
+					.collect::<Vec<String>>()
+					.join(", ")
+					.as_str());
+				/* if !args.is_empty() {
 					let j = args.len();
 					for i in 0..j {
 						if i > 0 {
@@ -44,7 +51,7 @@ impl JType {
 							.demangle_to_java()
 							.as_str());
 					}
-				}
+				} */
 				result.push(')');
 				result
 			},
